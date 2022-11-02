@@ -34,6 +34,10 @@ body {
 	background: rgba(0, 0, 0, 0.1)
 }
 
+.col h2:active {
+	background: rgba(0, 0, 0)
+}
+
 .col button {
 	cursor: pointer;
 	border: none;

@@ -34,6 +34,11 @@ window.addEventListener("load", (e) => {
       setTextColor(button, color);
     });
   };
+
+  const copyToClipboard = (text) => {
+    return navigator.clipboard.writeText(text);
+  };
+
   setColsColors();
 
   window.addEventListener("keydown", (e) => {
@@ -45,10 +50,13 @@ window.addEventListener("load", (e) => {
 
   window.addEventListener("click", (e) => {
     const button = e.target.closest('[data-type="lock"]');
+    const title = e.target.closest('[data-type="copy"]');
     if (button) {
       const icon = button.querySelector("i");
       icon.classList.toggle("fa-lock-open");
       icon.classList.toggle("fa-lock");
+    } else if (title) {
+      copyToClipboard(title.textContent);
     }
   });
 });
