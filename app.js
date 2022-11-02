@@ -11,7 +11,7 @@ window.addEventListener("load", (e) => {
     return "#" + color;
   };
 
-  const setRandomColors = (node) => {
+  const setColumnColors = (node) => {
     const color = chroma.random();
     node.style.background = color;
     return color;
@@ -22,24 +22,52 @@ window.addEventListener("load", (e) => {
     text.style.color = luminance > 0.5 ? "black" : "white";
   };
 
-  const setColsColors = () => {
-    cols.forEach((col) => {
+  const setColsColors = (isInitial) => {
+    const colors = isInitial ? getColorsFromHash() : [];
+
+    cols.forEach((col, i) => {
       const isLocked = col.querySelector("i").classList.contains("fa-lock");
-      if (isLocked) return;
+      if (isLocked) {
+        color.push(text.textContent);
+        return;
+      }
       const text = col.querySelector("h2");
       const button = col.querySelector("button");
-      const color = setRandomColors(col);
+      console.log("COLOR", colors[i]);
+      const color = isInitial && colors[i] ? colors[i] : setColumnColors(col);
+      if (!isInitial) colors.push(color);
       text.textContent = color;
       setTextColor(text, color);
       setTextColor(button, color);
     });
+
+    updateColorHash(colors);
   };
+
+  const updateColorHash = (colors = []) => {
+    document.location.hash = colors
+      .map((col) => {
+        return col.toString().substring(1);
+      })
+      .join("-");
+  };
+
+  const getColorsFromHash = () => {
+    if (document.location.hash.length > 1) {
+      return document.location.hash
+        .slice(1)
+        .split("-")
+        .map((c) => "#" + c);
+    }
+    return [];
+  };
+  console.log(getColorsFromHash());
 
   const copyToClipboard = (text) => {
     return navigator.clipboard.writeText(text);
   };
 
-  setColsColors();
+  setColsColors(true);
 
   window.addEventListener("keydown", (e) => {
     if (e.code == "Space") {
