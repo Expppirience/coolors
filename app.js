@@ -24,6 +24,8 @@ window.addEventListener("load", (e) => {
 
   const setColsColors = () => {
     cols.forEach((col) => {
+      const isLocked = col.querySelector("i").classList.contains("fa-lock");
+      if (isLocked) return;
       const text = col.querySelector("h2");
       const button = col.querySelector("button");
       const color = setRandomColors(col);
@@ -35,6 +37,18 @@ window.addEventListener("load", (e) => {
   setColsColors();
 
   window.addEventListener("keydown", (e) => {
-    e.code == "Space" ? setColsColors() : "";
+    if (e.code == "Space") {
+      e.preventDefault();
+      setColsColors();
+    }
+  });
+
+  window.addEventListener("click", (e) => {
+    const button = e.target.closest('[data-type="lock"]');
+    if (button) {
+      const icon = button.querySelector("i");
+      icon.classList.toggle("fa-lock-open");
+      icon.classList.toggle("fa-lock");
+    }
   });
 });
