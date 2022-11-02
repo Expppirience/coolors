@@ -1,0 +1,54 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+body {
+	height: 100vh;
+	display: flex;
+	font-family: 'Roboto',
+		sans-serif;
+}
+
+.col {
+	border: 1px solid crimson;
+	flex: 1;
+	background: lightblue;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.col h2 {
+	padding: 10px;
+	color: #fff;
+	transition: background 0.3s ease 0s;
+	will-change: background;
+	border-radius: 10px;
+}
+
+.col h2:hover {
+	cursor: pointer;
+	background: rgba(0, 0, 0, 0.1)
+}
+
+.col button {
+	cursor: pointer;
+	border: none;
+	background: transparent;
+	font-size: 1.5rem;
+	padding: 10px;
+	transition: background 0.3s ease 0s;
+	will-change: background;
+	border-radius: 10px;
+
+
+}
+
+.col button:hover {
+	background: rgba(0, 0, 0, 0.1);
+
+}
