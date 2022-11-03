@@ -11,10 +11,13 @@ window.addEventListener("load", (e) => {
     return "#" + color;
   };
 
-  const setColumnColors = (node) => {
+  const getRandomColor = () => {
     const color = chroma.random();
-    node.style.background = color;
     return color;
+  };
+
+  const setColColor = (col, color) => {
+    col.style.background = color;
   };
 
   const setTextColor = (text, color) => {
@@ -34,7 +37,8 @@ window.addEventListener("load", (e) => {
       const text = col.querySelector("h2");
       const button = col.querySelector("button");
       console.log("COLOR", colors[i]);
-      const color = isInitial && colors[i] ? colors[i] : setColumnColors(col);
+      const color = isInitial && colors[i] ? colors[i] : getRandomColor();
+      setColColor(col, color);
       if (!isInitial) colors.push(color);
       text.textContent = color;
       setTextColor(text, color);

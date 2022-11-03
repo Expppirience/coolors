@@ -48,7 +48,10 @@ body {
 	will-change: background;
 	border-radius: 10px;
 
+}
 
+.col button:focus {
+	border: none;
 }
 
 .col button i {
